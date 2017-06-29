@@ -22,6 +22,11 @@ namespace DailyDilbert.Core.ViewModels
         private void OnDilbertItems(List<DilbertItem> list)
         {
             IsLoading = false;
+			/*list.Insert(0, new DilbertItem()
+			{
+                Title = "#Items: " + list.Count,
+				StripUrl = null
+			}); */
             Items = list;
         }
 
@@ -29,6 +34,15 @@ namespace DailyDilbert.Core.ViewModels
         {
             // not reported for now
             IsLoading = false;
+            var items = new List<DilbertItem>
+            {
+                new DilbertItem()
+                {
+                    Title = "Error: "+ error.StackTrace,
+                    StripUrl = null
+                }
+            };
+            Items = items;
         }
 
         private bool _isLoading;

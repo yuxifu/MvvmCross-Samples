@@ -46,21 +46,24 @@ namespace DailyDilbert.Core
         private List<DilbertItem> ParseDilbertItemList(string text)
         {
             var xml = XDocument.Parse(text);
-            var items = xml.Descendants("item");
+            var items = xml.Descendants("{http://www.w3.org/2005/Atom}entry");
             var list = items.Select(x =>
-                                    new DilbertItem()
-                                    {
-                                        Title = x.Element("title").Value,
-                                        StripUrl = ExtractHttpImg(x.Element("description").Value)
-                                    }).ToList();
+                            new DilbertItem()
+                            {
+                                Title = x.Element("{http://www.w3.org/2005/Atom}title").Value,
+                                StripUrl = ExtractHttpImg(x.Element("{http://www.w3.org/2005/Atom}link").Value)
+                            }).ToList();
             return list;
         }
 
         private string ExtractHttpImg(string value)
         {
-            var startPos = value.IndexOf("http://");
+            //6/29/2017: no working any more due to Daily Dilbert policy change
+            //replaced with a random image
+            /*var startPos = value.IndexOf("http://");
             var endPos = value.IndexOf(".gif\"", startPos);
-            return value.Substring(startPos, endPos + 4 - startPos);
+            return value.Substring(startPos, endPos + 4 - startPos);*/
+            return "http://www.cs.vu.nl/~frankh/dilbert/work-life-balance.gif";
         }
     }
 }
