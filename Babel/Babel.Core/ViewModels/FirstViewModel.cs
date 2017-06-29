@@ -14,6 +14,18 @@ namespace Babel.Core.ViewModels
             _builder = builder;
         }
 
+        private string _hello = string.Empty;
+
+        public string Hello
+        {
+            get { return _hello; }
+            set
+            {
+                _hello = value;
+                RaisePropertyChanged(() => Hello);
+            }
+        }
+
         public ICommand LolCatCommand
         {
             get { return new MvxCommand(() => PickLanguage("LolCat")); }
