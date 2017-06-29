@@ -31,8 +31,8 @@ namespace FractalGen.UI.Droid.Views
         private void HackSetDisplayDimensions()
         {
             var disp = (DisplayDimensionsService) Mvx.Resolve<IDisplayDimensionsService>();
-            disp.Height = (int) (WindowManager.DefaultDisplay.Height*0.8);
-            disp.Width = (int) (WindowManager.DefaultDisplay.Width*0.8);
+            disp.Height = (int) (Resources.DisplayMetrics.HeightPixels*0.8);
+            disp.Width = (int) (Resources.DisplayMetrics.WidthPixels*0.8);
         }
     }
 }
